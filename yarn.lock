@@ -1578,6 +1578,11 @@ anymatch@^3.0.3:
     normalize-path "^3.0.0"
     picomatch "^2.0.4"
 
+app-loading@^0.0.51:
+  version "0.0.51"
+  resolved "https://registry.yarnpkg.com/app-loading/-/app-loading-0.0.51.tgz#0151381c4ef7216a39efb33baef8cc05517ae8eb"
+  integrity sha1-AVE4HE73IWo577M7rvjMBVF66Os=
+
 appdirsjs@^1.2.4:
   version "1.2.6"
   resolved "https://registry.yarnpkg.com/appdirsjs/-/appdirsjs-1.2.6.tgz#fccf9ee543315492867cacfcfd4a2b32257d30ac"
