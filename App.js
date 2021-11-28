@@ -1,19 +1,29 @@
 import AppLoading from "expo-app-loading";
 import React, { useState } from "react";
 import * as Font from "expo-font";
-import { Image, Text } from "react-native";
+import { Text, Image } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { Asset } from "expo-asset";
+import { NavigationContainer } from "@react-navigation/native";
+import Tabs from "./navigation/Tabs";
+
+const loadFonts = (fonts) => fonts.map((font) => Font.loadAsync(font));
+
+const loadImages = (images) =>
+  images.map((image) => {
+    if (typeof image === "string") {
+      return Image.prefetch(image);
+    } else {
+      return Asset.loadAsync(image);
+    }
+  });
 
 export default function App() {
   const [ready, setReady] = useState(false);
   const onFinish = () => setReady(true);
   const startLoading = async () => {
-    await Asset.loadAsync(require("./sky.jpeg"));
-    await Font.loadAsync(Ionicons.font);
-    await Image.prefetch(
-      "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/mbp14-spacegray-select-202110_GEO_KR?wid=904&hei=840&fmt=jpeg&qlt=80&.v=1633657358000"
-    );
+    const fonts = loadFonts([Ionicons.font]);
+    await Promise.all([...fonts]);
   };
   if (!ready) {
     return (
@@ -24,5 +34,9 @@ export default function App() {
       />
     );
   }
-  return <Text>We are done loading!</Text>;
+  return (
+    <NavigationContainer>
+      <Tabs />
+    </NavigationContainer>
+  );
 }
